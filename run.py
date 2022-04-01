@@ -5,10 +5,16 @@
 
 from random import randint
 
-#Function to create board for computer
-def create_computer_board():
-    board = {'a': 0, 'b': 1, 'c':2, 'd': 3,'e': 4, 'f': 5, 'g': 6, 'h':7}
-    return board
+#Function to create board for computer and player
+
+hidden_grid = [[' '] * 5 for x in range (5)]
+player_grid = [[' '] * 5 for x in range (5)]
+
+
+key = {'A': 0, 'B': 1, 'C':2, 'D': 3,'E': 4}
+
+def print_grid(grid)
+    print("A B C D E")
 
 #Function to create board for player
 def create_player_board():
@@ -77,8 +83,3 @@ if __name__ == "__main__":
     game_menu()
 
 
-
-
-
-
-    
