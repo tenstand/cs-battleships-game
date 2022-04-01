@@ -25,6 +25,13 @@ def print_player_board(player_board):
     for row in board:
         print(" ".join(row))
 
+#Create rows and columns
+
+def random_row(board):
+    return randint(0,len(board)-1)
+def random_column(board):
+    return randint(0,len(board)-1)
+
 #Create ships
 def create_ships(grid):
     for ship in range(5):
