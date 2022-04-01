@@ -7,26 +7,31 @@ from random import randint
 
 #Function to create board for computer and player
 
-hidden_grid = [[' '] * 5 for x in range (5)]
-player_grid = [[' '] * 5 for x in range (5)]
+hidden_board = []
 
+for x in range(0, 5):
+    hidden_board.append([0] * 5)
 
-key = {'A': 0, 'B': 1, 'C':2, 'D': 3,'E': 4}
+def print_hidden_board(hidden_board):
+    for row in board:
+        print(" ".join(row))
 
-def print_grid(grid)
-    print("A B C D E")
+player_board = []
 
-#Function to create board for player
-def create_player_board():
-    board = {'a': 0, 'b': 1, 'c':2, 'd': 3,'e': 4, 'f': 5, 'g': 6, 'h':7}
+for x in range (0, 5):
+    player_board.append([0] * 5)
+
+def print_player_board(player_board):
+    for row in board:
+        print(" ".join(row))
 
 #Create ships
-def create_ships(board):
+def create_ships(grid):
     for ship in range(5):
-        ship_row, ship_column = randint (0,7), randint(0,7)
-        while board [ship_row][ship_column] == 'X':
-            ship_row, ship_column = randint (0,7), randint(0,7)
-        board [ship_row][ship_column] = 'X'
+        ship_row, ship_column = randint(0,5), randint(0,5)
+        while board[ship_row][ship_column] == "X":
+            ship_row, ship_column = get_ship_location()
+        board[ship_row][ship_column] = "X"
 
 #Ship location
 def get_ship_location():
