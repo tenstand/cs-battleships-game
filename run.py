@@ -6,6 +6,28 @@
 
 from random import randint
 
+pc_board = []
+user_board = []
+
+def generate_computer_board():
+    ships_counter = 8
+    board= []
+    for row in range(0, 8):
+        columns = []
+        ship_added = 0
+        for column in range(0, 8):
+            if ships_counter > 0 and ship_added == 0:
+                value = randint(0, 1)
+                if value == 1:
+                    ships_counter = ships_counter - 1
+                    ship_added = 1
+                columns.append(value)
+            else:        
+                columns.append(0)
+        board.append(columns) 
+    return board
+
+
 #Function to create board for computer and player
 
 board = []
@@ -49,6 +71,10 @@ def create_ships(grid):
 #     for row in ship_location:
 #         board[row] = 'O'
 #     return board
+
+#Play ganme
+
+
 
 #check if all ships are hit
 def count_hit_ships(board):
@@ -97,7 +123,8 @@ if __name__ == "__main__":
     # print(pc_board)
     #game_menu()
 
-    create_ships(board)
-    print_board(board)
-
+    # create_ships(board)
+    # print_board(board)
+    pc_board = generate_computer_board()
+    print_board(pc_board)
 
