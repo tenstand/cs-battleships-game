@@ -1,13 +1,14 @@
 # Legend
-# '1' to place the ship
-# '2' if it's hit
-# '3' for a missed shot
-# '0' an empty space
+# 'X' to place the ship / or a hit
+# '0' for a missed shot
+# '_' an empty space
 
 from random import randint
 
 pc_board = []
 user_board = []
+
+#Function to create pc board 
 
 def generate_computer_board():
     ships_counter = 8
@@ -27,52 +28,51 @@ def generate_computer_board():
         board.append(columns) 
     return board
 
+#Function to create user board 
 
-#Function to create board for computer and player
-
-board = []
-
-for x in range(0, 5):
-    board.append([0] * 5)
-
-def print_board(board):
-    for row in board:
-        s=str(row)
-        print(" ".join(s))
-
-#Create rows and columns
-
-def random_row(board):
-    return randint(0,len(board)-1)
-def random_column(board):
-    return randint(0,len(board)-1)
+def generate_user_board():
+    ships_counter = 8
+    board= []
+    for row in range(0, 8):
+        columns = []
+        ship_added = 0
+        for column in range(0, 8):
+            board.append(columns) 
+    return board
 
 #Create ships
 def create_ships(grid):
-    for ship in range(4):
-        ship_row, ship_column = randint(0,4), randint(0,4)
+    for ship in range(8):
+        ship_row, ship_column = randint(0,8), randint(0,8)
         while grid[ship_row][ship_column] == 1:
             #ship_row, ship_column = get_ship_location()
             print("X")
         grid[ship_row][ship_column] = 1
 
 #Ship location
-# def get_ship_location():
-#     ship_location = []
-#     print('Please place your ship')
-#     while len(ship_location) < 5:
-#         row = input()
-#         if row not in board.keys():
-#             print('Please enter a valid row')
-#         if row in ship_location:
-#             print('This space is occupied')
-#         else: 
-#             ship_location.append(row)
-#     for row in ship_location:
-#         board[row] = 'O'
-#     return board
+def get_ship_location():
+    ship_location = []
+    print('Please place your ship')
+    while len(ship_location) < 8:
+        row = input()
+    if row not in board.keys():
+        print('Please enter a valid row')
+    if row in ship_location:
+        print('This space is occupied')
+    else: 
+        ship_location.append(row)
+    for row in ship_location:
+        board[row] = 'O'
+    return board
 
-#Play ganme
+#check if all ships are hit
+def count_hit_ships(board):
+    count = 0
+    for row in board:
+        for column in row:
+            if column == "X":
+                count += 1
+    return count
 
 
 
