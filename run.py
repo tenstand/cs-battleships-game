@@ -11,12 +11,12 @@ user_board = []
 #Function to create pc board 
 
 def generate_computer_board():
-    ships_counter = 8
+    ships_counter = 5
     board= []
-    for row in range(0, 8):
+    for row in range(0, 5):
         columns = []
         ship_added = 0
-        for column in range(0, 8):
+        for column in range(0, 5):
             if ships_counter > 0 and ship_added == 0:
                 value = randint(0, 1)
                 if value == 1:
@@ -31,12 +31,12 @@ def generate_computer_board():
 #Function to create user board 
 
 def generate_user_board():
-    ships_counter = 8
+    ships_counter = 5
     board= []
-    for row in range(0, 8):
+    for row in range(0, 5):
         columns = []
         ship_added = 0
-        for column in range(0, 8):
+        for column in range(0, 5):
             board.append(columns) 
     return board
 
@@ -75,17 +75,6 @@ def count_hit_ships(board):
     return count
 
 
-
-#check if all ships are hit
-def count_hit_ships(board):
-    count = 0
-    for row in board:
-        for column in row:
-            if column == 2:
-                count += 1
-    return count
-
-
 def input_is_valid(input, valid_values):
     try:
         if int(input) in valid_values:
@@ -118,13 +107,29 @@ def game_menu():
 
 
 if __name__ == "__main__":
-    # print("Running")
-    # pc_board = create_computer_board()
-    # print(pc_board)
-    #game_menu()
-
-    # create_ships(board)
-    # print_board(board)
+    create_ships(pc_board)
+    turns = 10
+    while turns > 0:
+        print("Take a guess")
+        print_board(user_board)
+        row, column = get_ship_location()
+        if user_board[row][column] == "-":
+            print("That space is empty.")
+        elif pc_board[row][column] == "X":
+            print("Hit")
+            user_board[row][column] = "X" 
+            turns -= 1  
+        else:
+            print("Miss!")
+            user_board[row][column] = "-"   
+            turns -= 1     
+        if count_hit_ships(user_board) == 8:
+            print("You win!")
+            break
+        print("You have " + str(turns) + " turns left")
+        if turns == 0:
+            print("Game ends")
+            
     pc_board = generate_computer_board()
     print_board(pc_board)
 
