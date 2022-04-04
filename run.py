@@ -4,29 +4,33 @@
 # '_' an empty space
 
 from random import randint
-
+ship = "X"
+empty = "_"
 pc_board = []
 user_board = []
 
 #Function to create pc board 
 
 def generate_computer_board():
-    ships_counter = 5
+    #ships_counter = 5
     board= []
     for row in range(0, 5):
         columns = []
-        ship_added = 0
+        #ship_added = 0
         for column in range(0, 5):
-            if ships_counter > 0 and ship_added == 0:
-                value = randint(0, 1)
-                if value == 1:
-                    ships_counter = ships_counter - 1
-                    ship_added = 1
-                columns.append(value)
-            else:        
-                columns.append(0)
+            # if ships_counter > 0 and ship_added == 0:
+            #     value = randint(0, 1)
+            #     if value == 1:
+            #         ships_counter = ships_counter - 1
+            #         ship_added = 1
+            #     columns.append(value)
+            # else:        
+            columns.append(empty)
         board.append(columns) 
     return board
+
+def print_board(board):
+    print(board)
 
 #Function to create user board 
 
@@ -42,17 +46,14 @@ def generate_user_board():
 
 #Create ships
 def create_ships(grid):
-    for ship in range(8):
-        ship_row, ship_column = randint(0,8), randint(0,8)
-        while grid[ship_row][ship_column] == 1:
-            #ship_row, ship_column = get_ship_location()
-            print("X")
-        grid[ship_row][ship_column] = 1
+    grid_size =len(grid[0])-1
+    for i in range(5):
+        ship_row, ship_column = randint(0, grid_size), randint(0, grid_size)
+        grid[ship_row][ship_column] = ship
 
 #Ship location
 def get_ship_location():
     ship_location = []
-    print('Please place your ship')
     while len(ship_location) < 8:
         row = input()
     if row not in board.keys():
@@ -70,7 +71,7 @@ def count_hit_ships(board):
     count = 0
     for row in board:
         for column in row:
-            if column == "X":
+            if column == ship:
                 count += 1
     return count
 
@@ -107,21 +108,27 @@ def game_menu():
 
 
 if __name__ == "__main__":
+    pc_board = generate_computer_board()
     create_ships(pc_board)
     turns = 10
     while turns > 0:
+        print_board(pc_board)
         print("Take a guess")
-        print_board(user_board)
-        row, column = get_ship_location()
-        if user_board[row][column] == "-":
-            print("That space is empty.")
-        elif pc_board[row][column] == "X":
+        row = input("Which row?")
+        column = input("Which column?")
+        row = int(row)
+        column = int(column)
+        #print_board(user_board)
+        #row, column = get_ship_location()
+        # if user_board[row][column] == "-":
+        #     print("That space is empty.")
+        if pc_board[row][column] == "X":
             print("Hit")
-            user_board[row][column] = "X" 
+            #user_board[row][column] = "X" 
             turns -= 1  
         else:
             print("Miss!")
-            user_board[row][column] = "-"   
+            #user_board[row][column] = "-"   
             turns -= 1     
         if count_hit_ships(user_board) == 8:
             print("You win!")
