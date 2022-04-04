@@ -6,6 +6,7 @@
 from random import randint
 ship = "X"
 empty = "_"
+miss = "0"
 pc_board = []
 user_board = []
 
@@ -92,19 +93,22 @@ def game_menu():
     print("1 - Instructions")
     print("2 - Play game")
     print("3 - Your score")
+    print("4 - Quit")
     print("*******************")
     option = input("Please enter your choice:  ")
-    valid_values = [1, 2, 3]
+    valid_values = [1, 2, 3, 4]
     is_valid = input_is_valid(option, valid_values)
     if is_valid:
         if int(option) == 1:
-            print("show instructions")
+            print("Show instructions")
         if int(option) == 2:
-            print_board(board)
+            print("Play game")
         if int(option) == 3:
-            print("show score")
+            print("Your score is: " + str(score))
+        if int (option) == "4":
+                print("Goodbye!")
     else:
-        print("Please select a valid number 1, 2 or 3")
+        print("Please select a valid number 1, 2, 3 or 4")
 
 
 if __name__ == "__main__":
@@ -114,8 +118,8 @@ if __name__ == "__main__":
     while turns > 0:
         print_board(pc_board)
         print("Take a guess")
-        row = input("Which row?")
-        column = input("Which column?")
+        row = input("Choose which row?")
+        column = input("Choose which column?")
         row = int(row)
         column = int(column)
         #print_board(user_board)
@@ -123,11 +127,11 @@ if __name__ == "__main__":
         # if user_board[row][column] == "-":
         #     print("That space is empty.")
         if pc_board[row][column] == "X":
-            print("Hit")
+            print("Direct hit")
             #user_board[row][column] = "X" 
             turns -= 1  
         else:
-            print("Miss!")
+            print("Sorry you missed!")
             #user_board[row][column] = "-"   
             turns -= 1     
         if count_hit_ships(user_board) == 8:
