@@ -42,7 +42,8 @@ def generate_user_board():
         columns = []
         ship_added = 0
         for column in range(0, 5):
-            board.append(columns) 
+            columns.append(0)
+        board.append(columns) 
     return board
 
 #Create ships
@@ -112,35 +113,37 @@ def game_menu():
 
 
 if __name__ == "__main__":
-    pc_board = generate_computer_board()
-    create_ships(pc_board)
-    turns = 10
-    while turns > 0:
-        print_board(pc_board)
-        print("Take a guess")
-        row = input("Choose which row?")
-        column = input("Choose which column?")
-        row = int(row)
-        column = int(column)
+    user_board = generate_user_board()
+    print_board(user_board)
+    # pc_board = generate_computer_board()
+    # create_ships(pc_board)
+    # turns = 10
+    # while turns > 0:
+    #     print_board(pc_board)
+    #     print("Take a guess")
+    #     row = input("Choose which row")
+    #     column = input("Choose which column")
+    #     row = int(row)
+    #     column = int(column)
         #print_board(user_board)
         #row, column = get_ship_location()
         # if user_board[row][column] == "-":
         #     print("That space is empty.")
-        if pc_board[row][column] == "X":
-            print("Direct hit")
+        # if pc_board[row][column] == "X":
+        #     print("Direct hit")
             #user_board[row][column] = "X" 
-            turns -= 1  
-        else:
-            print("Sorry you missed!")
+        #     turns -= 1  
+        # else:
+        #     print("Sorry you missed!")
             #user_board[row][column] = "-"   
-            turns -= 1     
-        if count_hit_ships(user_board) == 8:
-            print("You win!")
-            break
-        print("You have " + str(turns) + " turns left")
-        if turns == 0:
-            print("Game ends")
+            # turns -= 1     
+        # if count_hit_ships(user_board) == 8:
+        #     print("You win! All ships are destroyed")
+        #     break
+    #     print("You have " + str(turns) + " turns left")
+    #     if turns == 0:
+    #         print("Game over")
             
-    pc_board = generate_computer_board()
-    print_board(pc_board)
+    # pc_board = generate_computer_board()
+    # print_board(pc_board)
 
